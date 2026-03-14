@@ -8,476 +8,135 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --black: #0a0a0a;
-    --off-white: #f5f0eb;
-    --warm-gray: #9a8f85;
-    --accent: #c8a882;
-    --dark-card: #141414;
+    --black: #0a0a0a; --off-white: #f5f0eb; --warm-gray: #9a8f85;
+    --accent: #c8a882; --dark-card: #141414;
   }
-
   html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--off-white); font-family: 'Jost', sans-serif; font-weight: 200; cursor: none; overflow-x: hidden; }
 
-  body {
-    background: var(--black);
-    color: var(--off-white);
-    font-family: 'Jost', sans-serif;
-    font-weight: 200;
-    cursor: none;
-    overflow-x: hidden;
-  }
-
-  /* Custom cursor */
-  .cursor {
-    width: 10px; height: 10px;
-    background: var(--accent);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.15s ease, opacity 0.2s;
-    transform: translate(-50%, -50%);
-  }
-  .cursor-ring {
-    width: 36px; height: 36px;
-    border: 1px solid rgba(200,168,130,0.5);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: all 0.12s ease;
-  }
+  /* CURSOR */
+  .cursor { width:10px;height:10px;background:var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transition:transform 0.15s ease,opacity 0.2s;transform:translate(-50%,-50%);opacity:0; }
+  .cursor-ring { width:36px;height:36px;border:1px solid rgba(200,168,130,0.5);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.12s ease;opacity:0; }
 
   /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 28px 60px;
-    background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
-  }
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    font-weight: 300;
-    letter-spacing: 0.1em;
-    color: var(--off-white);
-    text-decoration: none;
-  }
-  .nav-links {
-    display: flex; gap: 44px; list-style: none;
-  }
-  .nav-links a {
-    color: var(--warm-gray);
-    text-decoration: none;
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    transition: color 0.3s;
-  }
-  .nav-links a:hover { color: var(--off-white); }
+  nav { position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:28px 60px;background:linear-gradient(to bottom,rgba(10,10,10,0.95),transparent); }
+  .nav-logo { font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;letter-spacing:0.1em;color:var(--off-white);text-decoration:none; }
+  .nav-links { display:flex;gap:44px;list-style:none; }
+  .nav-links a { color:var(--warm-gray);text-decoration:none;font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;transition:color 0.3s; }
+  .nav-links a:hover { color:var(--off-white); }
 
   /* HERO */
-  .hero {
-    height: 100vh;
-    position: relative;
-    display: flex; align-items: flex-end;
-    padding: 0 60px 80px;
-    overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background: 
-      linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.3) 50%, rgba(10,10,10,0.5) 100%),
-      url('https://im.vsco.co/aws-us-west-2/67d41c/31349333/67eef07ea924971367239c6d/vsco_040325.jpg?w=1600') center/cover no-repeat;
-    transform: scale(1.05);
-    animation: heroZoom 8s ease-out forwards;
-  }
-  @keyframes heroZoom {
-    from { transform: scale(1.08); }
-    to { transform: scale(1.0); }
-  }
-  .hero-content {
-    position: relative; z-index: 2;
-    animation: heroFade 1.4s ease-out 0.3s both;
-  }
-  @keyframes heroFade {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .hero-eyebrow {
-    font-size: 0.68rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 18px;
-  }
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3.5rem, 8vw, 7rem);
-    font-weight: 300;
-    line-height: 1.0;
-    margin-bottom: 28px;
-  }
-  .hero-title em { font-style: italic; color: var(--accent); }
-  .hero-sub {
-    font-size: 0.82rem;
-    letter-spacing: 0.15em;
-    color: var(--warm-gray);
-    max-width: 380px;
-    line-height: 1.8;
-  }
-  .hero-scroll {
-    position: absolute; bottom: 80px; right: 60px;
-    display: flex; flex-direction: column; align-items: center; gap: 10px;
-    font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--warm-gray);
-  }
-  .hero-scroll::after {
-    content: '';
-    display: block;
-    width: 1px; height: 60px;
-    background: linear-gradient(to bottom, var(--warm-gray), transparent);
-    animation: scrollLine 2s ease-in-out infinite;
-  }
-  @keyframes scrollLine {
-    0%, 100% { opacity: 0.4; transform: scaleY(1); }
-    50% { opacity: 1; }
-  }
+  .hero { height:100vh;position:relative;display:flex;align-items:flex-end;padding:0 60px 80px;overflow:hidden; }
+  .hero-bg { position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;transform:scale(1.05);animation:heroZoom 8s ease-out forwards; }
+  .hero-bg::after { content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,0.92) 0%,rgba(10,10,10,0.3) 50%,rgba(10,10,10,0.5) 100%); }
+  @keyframes heroZoom { from{transform:scale(1.08);}to{transform:scale(1.0);} }
+  .hero-content { position:relative;z-index:2;animation:heroFade 1.4s ease-out 0.3s both; }
+  @keyframes heroFade { from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);} }
+  .hero-eyebrow { font-size:0.68rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--accent);margin-bottom:18px; }
+  .hero-title { font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,8vw,7rem);font-weight:300;line-height:1.0;margin-bottom:28px; }
+  .hero-title em { font-style:italic;color:var(--accent); }
+  .hero-sub { font-size:0.82rem;letter-spacing:0.15em;color:var(--warm-gray);max-width:380px;line-height:1.8; }
+  .hero-scroll { position:absolute;bottom:80px;right:60px;display:flex;flex-direction:column;align-items:center;gap:10px;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--warm-gray); }
+  .hero-scroll::after { content:'';display:block;width:1px;height:60px;background:linear-gradient(to bottom,var(--warm-gray),transparent);animation:scrollLine 2s ease-in-out infinite; }
+  @keyframes scrollLine { 0%,100%{opacity:0.4;}50%{opacity:1;} }
 
   /* SECTION COMMON */
-  section { padding: 120px 60px; }
-  .section-label {
-    font-size: 0.62rem;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 14px;
-  }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.2rem, 4vw, 3.5rem);
-    font-weight: 300;
-    line-height: 1.15;
-    margin-bottom: 50px;
-  }
-  .section-title em { font-style: italic; }
+  section { padding:120px 60px; }
+  .section-label { font-size:0.62rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--accent);margin-bottom:14px; }
+  .section-title { font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:300;line-height:1.15;margin-bottom:50px; }
+  .section-title em { font-style:italic; }
 
-  /* GALLERY */
-  #portfolio { padding-top: 80px; }
-  .gallery-intro {
-    display: flex; justify-content: space-between; align-items: flex-end;
-    margin-bottom: 50px;
-  }
-  .gallery-intro p {
-    max-width: 380px;
-    color: var(--warm-gray);
-    line-height: 1.8;
-    font-size: 0.9rem;
-  }
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: auto;
-    gap: 12px;
-  }
-  .gallery-item {
-    overflow: hidden;
-    position: relative;
-    background: var(--dark-card);
-  }
-  .gallery-item::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: rgba(10,10,10,0);
-    transition: background 0.4s ease;
-  }
-  .gallery-item:hover::after { background: rgba(10,10,10,0.25); }
-  .gallery-item img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.7s ease;
-    filter: brightness(0.92) contrast(1.05);
-  }
-  .gallery-item:hover img { transform: scale(1.04); }
+  /* PORTFOLIO */
+  #portfolio { padding-top:80px; }
+  .gallery-intro { display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:50px; }
+  .gallery-intro p { max-width:380px;color:var(--warm-gray);line-height:1.8;font-size:0.9rem; }
 
-  /* Grid layout */
-  .g1 { grid-column: 1/6; grid-row: 1/3; aspect-ratio: 3/4; }
-  .g2 { grid-column: 6/9; grid-row: 1; aspect-ratio: 4/3; }
-  .g3 { grid-column: 9/13; grid-row: 1/3; aspect-ratio: 3/4; }
-  .g4 { grid-column: 6/9; grid-row: 2; aspect-ratio: 4/3; }
-  .g5 { grid-column: 1/5; grid-row: 3; aspect-ratio: 4/3; }
-  .g6 { grid-column: 5/9; grid-row: 3; aspect-ratio: 4/3; }
-  .g7 { grid-column: 9/13; grid-row: 3; aspect-ratio: 4/3; }
+  /* ROTATING SLIDESHOW */
+  .portfolio-slideshow { position:relative;width:100%;height:75vh;overflow:hidden;background:var(--dark-card); }
+  .slide { position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;background-size:cover;background-position:center; }
+  .slide.active { opacity:1; }
+  .slide-overlay { position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,0.5) 0%,transparent 60%); }
+  .slideshow-controls { position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:10; }
+  .slide-dot { width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.3);border:none;cursor:pointer;transition:all 0.3s;padding:0; }
+  .slide-dot.active { background:var(--accent);transform:scale(1.4); }
+  .slideshow-arrows { position:absolute;top:50%;transform:translateY(-50%);width:100%;display:flex;justify-content:space-between;padding:0 30px;z-index:10;pointer-events:none; }
+  .slide-arrow { width:44px;height:44px;border:1px solid rgba(255,255,255,0.2);background:rgba(10,10,10,0.4);color:var(--off-white);font-size:1.1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;pointer-events:all;transition:all 0.3s;backdrop-filter:blur(4px); }
+  .slide-arrow:hover { background:rgba(200,168,130,0.3);border-color:var(--accent); }
 
   /* ABOUT */
-  #about {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 100px;
-    align-items: center;
-  }
-  .about-image {
-    position: relative;
-  }
-  .about-image img {
-    width: 100%;
-    aspect-ratio: 3/4;
-    object-fit: cover;
-    filter: brightness(0.88) contrast(1.05);
-  }
-  .about-image::before {
-    content: '';
-    position: absolute;
-    top: -20px; left: -20px;
-    right: 20px; bottom: 20px;
-    border: 1px solid rgba(200,168,130,0.2);
-    z-index: -1;
-  }
-  .about-text p {
-    color: var(--warm-gray);
-    line-height: 1.9;
-    font-size: 0.95rem;
-    margin-bottom: 22px;
-  }
-  .about-stats {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 30px; margin-top: 50px;
-    padding-top: 40px;
-    border-top: 1px solid rgba(255,255,255,0.07);
-  }
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.8rem;
-    font-weight: 300;
-    color: var(--accent);
-    line-height: 1;
-  }
-  .stat-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--warm-gray);
-    margin-top: 6px;
-  }
+  #about { display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center; }
+  .about-images { position:relative; }
+  .about-photo-stack { position:relative;height:600px; }
+  .about-photo-main { position:absolute;top:0;left:0;width:75%;aspect-ratio:3/4;object-fit:cover;filter:brightness(0.88) contrast(1.05);z-index:2; }
+  .about-photo-secondary { position:absolute;bottom:0;right:0;width:60%;aspect-ratio:4/5;object-fit:cover;filter:brightness(0.85) contrast(1.05);z-index:3;border:4px solid var(--black); }
+  .about-photo-accent { position:absolute;top:40%;left:55%;width:35%;aspect-ratio:1;object-fit:cover;filter:brightness(0.82) contrast(1.05);z-index:1;border:4px solid var(--black); }
+  .about-images::before { content:'';position:absolute;top:-20px;left:-20px;right:20px;bottom:20px;border:1px solid rgba(200,168,130,0.2);z-index:0; }
+  .about-text p { color:var(--warm-gray);line-height:1.9;font-size:0.95rem;margin-bottom:22px; }
+  .about-stats { display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:50px;padding-top:40px;border-top:1px solid rgba(255,255,255,0.07); }
+  .stat-num { font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:var(--accent);line-height:1; }
+  .stat-label { font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm-gray);margin-top:6px; }
 
   /* SERVICES */
-  #services { background: var(--dark-card); }
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
-    margin-top: 10px;
-  }
-  .service-card {
-    padding: 50px 40px;
-    background: #111;
-    position: relative;
-    transition: background 0.3s;
-  }
-  .service-card:hover { background: #161616; }
-  .service-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 4rem;
-    font-weight: 300;
-    color: rgba(200,168,130,0.12);
-    line-height: 1;
-    margin-bottom: 20px;
-  }
-  .service-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    font-weight: 300;
-    margin-bottom: 14px;
-  }
-  .service-desc {
-    color: var(--warm-gray);
-    font-size: 0.85rem;
-    line-height: 1.8;
-    margin-bottom: 28px;
-  }
-  .service-price {
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
+  #services { background:var(--dark-card); }
+  .services-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:10px; }
+  .service-card { padding:50px 40px;background:#111;position:relative;overflow:hidden;transition:background 0.3s; }
+  .service-card:hover { background:#0d0d0d; }
+  .service-hover-photos { position:absolute;inset:0;opacity:0;transition:opacity 0.5s ease;pointer-events:none; }
+  .service-card:hover .service-hover-photos { opacity:1; }
+  .service-hover-slide { position:absolute;inset:0;opacity:0;transition:opacity 0.8s ease;background-size:cover;background-position:center; }
+  .service-hover-slide.active { opacity:1; }
+  .service-hover-overlay { position:absolute;inset:0;background:rgba(10,10,10,0.65); }
+  .service-content { position:relative;z-index:2; }
+  .service-number { font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:300;color:rgba(200,168,130,0.12);line-height:1;margin-bottom:20px;transition:color 0.3s; }
+  .service-card:hover .service-number { color:rgba(200,168,130,0.3); }
+  .service-name { font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;margin-bottom:14px; }
+  .service-desc { color:var(--warm-gray);font-size:0.85rem;line-height:1.8;margin-bottom:28px; }
+  .service-price { font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent); }
 
   /* TESTIMONIALS */
-  #testimonials { text-align: center; }
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    margin-top: 60px;
-    text-align: left;
-  }
-  .testimonial {
-    padding: 44px;
-    border: 1px solid rgba(255,255,255,0.06);
-    position: relative;
-  }
-  .testimonial::before {
-    content: '"';
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 6rem;
-    color: var(--accent);
-    opacity: 0.25;
-    position: absolute;
-    top: 10px; left: 34px;
-    line-height: 1;
-  }
-  .testimonial-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.15rem;
-    font-weight: 300;
-    font-style: italic;
-    line-height: 1.7;
-    color: var(--off-white);
-    margin-bottom: 24px;
-    padding-top: 30px;
-  }
-  .testimonial-author {
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
+  #testimonials { text-align:center; }
+  .testimonials-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:30px;margin-top:60px;text-align:left; }
+  .testimonial { padding:44px;border:1px solid rgba(255,255,255,0.06);position:relative; }
+  .testimonial::before { content:'"';font-family:'Cormorant Garamond',serif;font-size:6rem;color:var(--accent);opacity:0.25;position:absolute;top:10px;left:34px;line-height:1; }
+  .testimonial-text { font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:300;font-style:italic;line-height:1.7;color:var(--off-white);margin-bottom:24px;padding-top:30px; }
+  .testimonial-author { font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent); }
 
   /* CONTACT */
-  #contact {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 100px;
-  }
-  .contact-info p {
-    color: var(--warm-gray);
-    line-height: 1.9;
-    font-size: 0.9rem;
-    margin-bottom: 40px;
-  }
-  .contact-detail {
-    display: flex; flex-direction: column; gap: 16px;
-  }
-  .contact-item {
-    display: flex; flex-direction: column; gap: 4px;
-  }
-  .contact-item-label {
-    font-size: 0.6rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-  .contact-item-value {
-    font-size: 0.9rem;
-    color: var(--off-white);
-  }
-  .contact-form { display: flex; flex-direction: column; gap: 24px; }
-  .form-group { display: flex; flex-direction: column; gap: 8px; }
-  .form-label {
-    font-size: 0.6rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--warm-gray);
-  }
-  .form-input, .form-textarea {
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid rgba(255,255,255,0.12);
-    color: var(--off-white);
-    font-family: 'Jost', sans-serif;
-    font-weight: 200;
-    font-size: 0.9rem;
-    padding: 12px 0;
-    outline: none;
-    transition: border-color 0.3s;
-    resize: none;
-    cursor: text;
-  }
-  .form-input:focus, .form-textarea:focus {
-    border-bottom-color: var(--accent);
-  }
-  .form-textarea { height: 100px; }
-  .btn-submit {
-    align-self: flex-start;
-    background: var(--accent);
-    color: var(--black);
-    border: none;
-    padding: 16px 44px;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-  .btn-submit:hover { background: var(--off-white); transform: translateY(-2px); }
+  #contact { display:grid;grid-template-columns:1fr 1fr;gap:100px; }
+  .contact-info p { color:var(--warm-gray);line-height:1.9;font-size:0.9rem;margin-bottom:40px; }
+  .contact-detail { display:flex;flex-direction:column;gap:16px; }
+  .contact-item { display:flex;flex-direction:column;gap:4px; }
+  .contact-item-label { font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent); }
+  .contact-item-value { font-size:0.9rem;color:var(--off-white); }
+  .contact-form { display:flex;flex-direction:column;gap:24px; }
+  .form-group { display:flex;flex-direction:column;gap:8px; }
+  .form-label { font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--warm-gray); }
+  .form-input,.form-textarea { background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.12);color:var(--off-white);font-family:'Jost',sans-serif;font-weight:200;font-size:0.9rem;padding:12px 0;outline:none;transition:border-color 0.3s;resize:none;cursor:text; }
+  .form-input:focus,.form-textarea:focus { border-bottom-color:var(--accent); }
+  .form-textarea { height:100px; }
+  .btn-submit { align-self:flex-start;background:var(--accent);color:var(--black);border:none;padding:16px 44px;font-family:'Jost',sans-serif;font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;transition:background 0.3s,transform 0.2s;margin-top:10px; }
+  .btn-submit:hover { background:var(--off-white);transform:translateY(-2px); }
 
   /* FOOTER */
-  footer {
-    padding: 50px 60px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .footer-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    font-weight: 300;
-    letter-spacing: 0.1em;
-    color: var(--warm-gray);
-  }
-  .footer-copy {
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    color: rgba(154,143,133,0.5);
-  }
-  .footer-social {
-    display: flex; gap: 28px; list-style: none;
-  }
-  .footer-social a {
-    font-size: 0.62rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--warm-gray);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  .footer-social a:hover { color: var(--accent); }
+  footer { padding:50px 60px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center; }
+  .footer-logo { font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;letter-spacing:0.1em;color:var(--warm-gray); }
+  .footer-copy { font-size:0.65rem;letter-spacing:0.15em;color:rgba(154,143,133,0.5); }
+  .footer-social { display:flex;gap:28px;list-style:none; }
+  .footer-social a { font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--warm-gray);text-decoration:none;transition:color 0.3s; }
+  .footer-social a:hover { color:var(--accent); }
 
-  /* PHOTO PLACEHOLDER NOTE */
-  .photo-note {
-    position: fixed;
-    bottom: 20px; left: 50%; transform: translateX(-50%);
-    background: rgba(200,168,130,0.15);
-    border: 1px solid rgba(200,168,130,0.3);
-    color: var(--accent);
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    padding: 10px 24px;
-    z-index: 200;
-    backdrop-filter: blur(10px);
-  }
+  /* FADE UP */
+  .fade-up { opacity:1;transform:translateY(0);transition:opacity 0.8s ease,transform 0.8s ease; }
 
-  /* Fade-in on scroll */
-  .fade-up {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  .fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  @media (max-width: 900px) {
-    nav { padding: 24px 30px; }
-    section { padding: 80px 30px; }
-    #about, #contact { grid-template-columns: 1fr; gap: 50px; }
-    .services-grid { grid-template-columns: 1fr; }
-    .testimonials-grid { grid-template-columns: 1fr; }
-    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-    .g1,.g2,.g3,.g4,.g5,.g6,.g7 { grid-column: auto; grid-row: auto; aspect-ratio: 4/3; }
+  @media (max-width:900px) {
+    nav { padding:24px 30px; }
+    section { padding:80px 30px; }
+    #about { grid-template-columns:1fr;gap:50px; }
+    #contact { grid-template-columns:1fr;gap:50px; }
+    .services-grid { grid-template-columns:1fr; }
+    .testimonials-grid { grid-template-columns:1fr; }
+    .portfolio-slideshow { height:55vw; }
   }
 </style>
 </head>
@@ -486,7 +145,6 @@
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">Danielle Cortez</a>
   <ul class="nav-links">
@@ -499,7 +157,7 @@
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-bg"></div>
+  <div class="hero-bg" id="heroBg"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Photography &amp; Visual Storytelling</p>
     <h1 class="hero-title">Danielle<br><em>Cortez</em></h1>
@@ -517,37 +175,23 @@
     </div>
     <p>A curated selection of portraits, moments, and visual stories — each image a world of its own.</p>
   </div>
-
-  <div class="gallery-grid fade-up">
-    <!-- Your actual VSCO photos -->
-    <div class="gallery-item g1">
-      <img src="https://im.vsco.co/aws-us-west-2/67d41c/31349333/68947631abf346c5504fb7c5/vsco_080725.jpg?w=800" alt="Photography by Danielle Cortez">
+  <div class="portfolio-slideshow fade-up" id="portfolioSlideshow">
+    <div class="slideshow-arrows">
+      <button class="slide-arrow" id="prevBtn">&#8592;</button>
+      <button class="slide-arrow" id="nextBtn">&#8594;</button>
     </div>
-    <div class="gallery-item g2">
-      <img src="https://im.vsco.co/aws-us-west-2/67d41c/31349333/6880d780838c0657ab755b82/vsco_072325.jpg?w=800" alt="Photography by Danielle Cortez">
-    </div>
-    <div class="gallery-item g3">
-      <img src="https://im.vsco.co/aws-us-west-2/67d41c/31349333/67eef3eaa924971367239c72/vsco_040325.jpg?w=800" alt="Photography by Danielle Cortez">
-    </div>
-    <div class="gallery-item g4">
-      <img src="https://im.vsco.co/aws-us-west-2/67d41c/31349333/67eef15da924971367239c6e/vsco_040325.jpg?w=800" alt="Photography by Danielle Cortez">
-    </div>
-    <div class="gallery-item g5">
-      <img src="https://im.vsco.co/aws-us-west-2/67d41c/31349333/689475b6abf346c5504fb7c4/vsco_080725.jpg?w=800" alt="Photography by Danielle Cortez">
-    </div>
-    <div class="gallery-item g6">
-      <img src="https://im.vsco.co/aws-us-west-2/67d41c/31349333/6880d148838c0657ab755b81/vsco_072325.jpg?w=800" alt="Photography by Danielle Cortez">
-    </div>
-    <div class="gallery-item g7">
-      <img src="https://im.vsco.co/aws-us-west-2/67d41c/31349333/67eef38ca924971367239c71/vsco_040325.jpg?w=800" alt="Photography by Danielle Cortez">
-    </div>
+    <div class="slideshow-controls" id="slideDots"></div>
   </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="about-image fade-up">
-    <img src="https://im.vsco.co/aws-us-west-2/67d41c/31349333/688397ef3a1b7d957825fa1c/vsco_072525.jpg?w=800" alt="Danielle Cortez Photography">
+  <div class="about-images fade-up">
+    <div class="about-photo-stack">
+      <img class="about-photo-main" id="aboutMain" src="" alt="Danielle Cortez Photography">
+      <img class="about-photo-secondary" id="aboutSecondary" src="" alt="Danielle Cortez Photography">
+      <img class="about-photo-accent" id="aboutAccent" src="" alt="Danielle Cortez Photography">
+    </div>
   </div>
   <div class="about-text fade-up">
     <p class="section-label">About Me</p>
@@ -556,52 +200,55 @@
     <p>My work is moody, cinematic, and atmospheric — rooted in documentary instinct and shaped by the streets, interiors, and quiet corners I've moved through. I shoot what I find, the way I find it, and I want anyone looking at the image to feel like they were standing right there.</p>
     <p>Now based in London with 3–5 years behind the camera, I work with clients on portraits, events, travel commissions, and brand projects — bringing that same immersive, honest eye to every shoot.</p>
     <div class="about-stats">
-      <div>
-        <div class="stat-num">3–5</div>
-        <div class="stat-label">Years Shooting</div>
-      </div>
-      <div>
-        <div class="stat-num">4</div>
-        <div class="stat-label">Services Offered</div>
-      </div>
-      <div>
-        <div class="stat-num">LDN</div>
-        <div class="stat-label">Based In</div>
-      </div>
+      <div><div class="stat-num">3–5</div><div class="stat-label">Years Shooting</div></div>
+      <div><div class="stat-num">4</div><div class="stat-label">Services Offered</div></div>
+      <div><div class="stat-num">LDN</div><div class="stat-label">Based In</div></div>
     </div>
   </div>
 </section>
 
 <!-- SERVICES -->
 <section id="services">
-  <div class="fade-up" style="text-align:center; margin-bottom: 60px;">
+  <div class="fade-up" style="text-align:center;margin-bottom:60px;">
     <p class="section-label">What I Offer</p>
     <h2 class="section-title">Services &amp; <em>Pricing</em></h2>
   </div>
   <div class="services-grid fade-up">
-    <div class="service-card">
-      <div class="service-number">01</div>
-      <h3 class="service-name">Portrait Sessions</h3>
-      <p class="service-desc">Individual or small group portraits on location across London or beyond. Relaxed, natural, and directed to bring out something real. Includes a curated gallery of 30+ edited images.</p>
-      <p class="service-price">From £200</p>
+    <div class="service-card" data-service="portraits">
+      <div class="service-hover-photos" id="hoverPortraits"></div>
+      <div class="service-content">
+        <div class="service-number">01</div>
+        <h3 class="service-name">Portrait Sessions</h3>
+        <p class="service-desc">Individual or small group portraits on location across London or beyond. Relaxed, natural, and directed to bring out something real. Includes a curated gallery of 30+ edited images.</p>
+        <p class="service-price">From £200</p>
+      </div>
     </div>
-    <div class="service-card">
-      <div class="service-number">02</div>
-      <h3 class="service-name">Events & Occasions</h3>
-      <p class="service-desc">Birthdays, graduations, gatherings, and life's bigger moments. Candid, documentary-style coverage — captured as they happen, never staged. Full-day coverage available.</p>
-      <p class="service-price">From £400</p>
+    <div class="service-card" data-service="events">
+      <div class="service-hover-photos" id="hoverEvents"></div>
+      <div class="service-content">
+        <div class="service-number">02</div>
+        <h3 class="service-name">Events &amp; Occasions</h3>
+        <p class="service-desc">Birthdays, graduations, gatherings, and life's bigger moments. Candid, documentary-style coverage — captured as they happen, never staged. Full-day coverage available.</p>
+        <p class="service-price">From £400</p>
+      </div>
     </div>
-    <div class="service-card">
-      <div class="service-number">03</div>
-      <h3 class="service-name">Travel & Editorial</h3>
-      <p class="service-desc">Commission-based travel photography for editorial projects, publications, and personal stories worth telling. Available across Europe and worldwide — let's talk.</p>
-      <p class="service-price">By enquiry</p>
+    <div class="service-card" data-service="travel">
+      <div class="service-hover-photos" id="hoverTravel"></div>
+      <div class="service-content">
+        <div class="service-number">03</div>
+        <h3 class="service-name">Travel &amp; Editorial</h3>
+        <p class="service-desc">Commission-based travel photography for editorial projects, publications, and personal stories worth telling. Available across Europe and worldwide — let's talk.</p>
+        <p class="service-price">By enquiry</p>
+      </div>
     </div>
-    <div class="service-card">
-      <div class="service-number">04</div>
-      <h3 class="service-name">Brand & Commercial</h3>
-      <p class="service-desc">Atmospheric, story-led imagery for small businesses, creatives, and brands who want photography that feels lived-in rather than produced. Packages tailored to your project.</p>
-      <p class="service-price">From £350</p>
+    <div class="service-card" data-service="brand">
+      <div class="service-hover-photos" id="hoverBrand"></div>
+      <div class="service-content">
+        <div class="service-number">04</div>
+        <h3 class="service-name">Brand &amp; Commercial</h3>
+        <p class="service-desc">Atmospheric, story-led imagery for small businesses, creatives, and brands who want photography that feels lived-in rather than produced. Packages tailored to your project.</p>
+        <p class="service-price">From £350</p>
+      </div>
     </div>
   </div>
 </section>
@@ -618,7 +265,7 @@
       <p class="testimonial-author">— Sarah M., Family Portrait Client</p>
     </div>
     <div class="testimonial">
-      <p class="testimonial-text">The brand photos she created for my boutique completely transformed how I show up online. Inquiries doubled in the first month. Worth every penny.</p>
+      <p class="testimonial-text">The brand photos she created for my boutique completely transformed how I show up online. Enquiries doubled in the first month. Worth every penny.</p>
       <p class="testimonial-author">— Keisha T., Small Business Owner</p>
     </div>
   </div>
@@ -629,52 +276,24 @@
   <div class="contact-info fade-up">
     <p class="section-label">Get In Touch</p>
     <h2 class="section-title">Let's Create<br><em>Something</em></h2>
-    <p>Based in London and open to projects near and far. Whether you have a clear vision or just the beginning of an idea, I'd love to hear from you. Fill in the form and I'll be in touch.</p>
+    <p>Based in London and open to projects near and far. Whether you have a clear vision or just the beginning of an idea, I'd love to hear from you.</p>
     <div class="contact-detail">
-      <div class="contact-item">
-        <span class="contact-item-label">Based In</span>
-        <span class="contact-item-value">London, UK</span>
-      </div>
-      <div class="contact-item">
-        <span class="contact-item-label">Available For</span>
-        <span class="contact-item-value">Portraits · Events · Travel · Brand</span>
-      </div>
-      <div class="contact-item">
-        <span class="contact-item-label">Email</span>
-        <span class="contact-item-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="274346494e424b4b4244485553425d674e444b4852430944484a">[email&#160;protected]</a></span>
-      </div>
-      <div class="contact-item">
-        <span class="contact-item-label">Instagram</span>
-        <span class="contact-item-value">@londonfieldsSessions</span>
-      </div>
-      <div class="contact-item">
-        <span class="contact-item-label">VSCO</span>
-        <span class="contact-item-value">vsco.co/danielle-cortez</span>
-      </div>
+      <div class="contact-item"><span class="contact-item-label">Based In</span><span class="contact-item-value">London, UK</span></div>
+      <div class="contact-item"><span class="contact-item-label">Available For</span><span class="contact-item-value">Portraits · Events · Travel · Brand</span></div>
+      <div class="contact-item"><span class="contact-item-label">Email</span><span class="contact-item-value">daniellecortez@icloud.com</span></div>
+      <div class="contact-item"><span class="contact-item-label">Instagram</span><span class="contact-item-value">@londonfieldsSessions</span></div>
+      <div class="contact-item"><span class="contact-item-label">VSCO</span><span class="contact-item-value">vsco.co/danielle-cortez</span></div>
     </div>
   </div>
   <form class="contact-form fade-up" onsubmit="return false;">
-    <div class="form-group">
-      <label class="form-label">Your Name</label>
-      <input class="form-input" type="text" placeholder="First & Last Name">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Email Address</label>
-      <input class="form-input" type="email" placeholder="you@email.com">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Project Type</label>
-      <input class="form-input" type="text" placeholder="Portrait, Event, Travel, Brand...">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Tell Me More</label>
-      <textarea class="form-textarea" placeholder="Share details about your vision, date, location..."></textarea>
-    </div>
+    <div class="form-group"><label class="form-label">Your Name</label><input class="form-input" type="text" placeholder="First & Last Name"></div>
+    <div class="form-group"><label class="form-label">Email Address</label><input class="form-input" type="email" placeholder="you@email.com"></div>
+    <div class="form-group"><label class="form-label">Project Type</label><input class="form-input" type="text" placeholder="Portrait, Event, Travel, Brand..."></div>
+    <div class="form-group"><label class="form-label">Tell Me More</label><textarea class="form-textarea" placeholder="Share details about your vision, date, location..."></textarea></div>
     <button class="btn-submit" type="submit">Send Enquiry</button>
   </form>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo">Danielle Cortez Photography</div>
   <p class="footer-copy">© 2026 Danielle Cortez. All rights reserved.</p>
@@ -684,82 +303,189 @@
   </ul>
 </footer>
 
-
-
 <script>
-  // ── Custom cursor (with fallback) ──────────────────────────
-  const cursor = document.getElementById('cursor');
-  const ring   = document.getElementById('cursorRing');
+const CLOUD = 'dbcfaw4kv';
+const BASE  = `https://res.cloudinary.com/${CLOUD}/image/upload/q_auto,f_auto`;
 
-  if (cursor && ring) {
-    let mx = 0, my = 0, rx = 0, ry = 0;
-    let cursorVisible = false;
+// ── Photo lists by folder (Cloudinary lists by upload order) ──
+const photos = {
+  hero:      [1],   // 1 photo
+  about:     [1,2,3,4],
+  portfolio: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],
+  portraits: [1,2,3,4,5,6,7,8,9,10,11,12],
+  events:    [1,2,3,4],
+  travel:    [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
+  brand:     [1,2,3,4,5,6,7,8,9]
+};
 
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      if (!cursorVisible) {
-        cursor.style.opacity = '1';
-        ring.style.opacity   = '1';
-        cursorVisible = true;
-      }
-    });
-
-    // Start hidden until mouse moves
-    cursor.style.opacity = '0';
-    ring.style.opacity   = '0';
-
-    function animateCursor() {
-      cursor.style.left = mx + 'px';
-      cursor.style.top  = my + 'px';
-      rx += (mx - rx) * 0.12;
-      ry += (my - ry) * 0.12;
-      ring.style.left = rx + 'px';
-      ring.style.top  = ry + 'px';
-      requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-
-    document.querySelectorAll('a, button, .gallery-item').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'translate(-50%, -50%) scale(2.5)';
-        ring.style.transform   = 'translate(-50%, -50%) scale(1.5)';
-        ring.style.borderColor = 'rgba(200,168,130,0.8)';
-      });
-      el.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-        ring.style.transform   = 'translate(-50%, -50%) scale(1)';
-        ring.style.borderColor = 'rgba(200,168,130,0.5)';
-      });
-    });
+// Cloudinary folder URL helper — uses fl_attachment to list by index isn't possible
+// so we use the actual public IDs fetched via the Search API approach
+// Instead, we use the list resource trick: fetch the folder listing via JS
+async function getFolderImages(folder) {
+  try {
+    const res = await fetch(`https://res.cloudinary.com/${CLOUD}/image/list/${folder}.json`);
+    const data = await res.json();
+    return data.resources.map(r => `${BASE}/${r.public_id}`);
+  } catch(e) {
+    return [];
   }
+}
 
-  // ── Scroll fade-in ─────────────────────────────────────────
-  // Make all fade-up elements visible immediately as a safety net,
-  // then apply the scroll animation on top if IntersectionObserver works
-  document.querySelectorAll('.fade-up').forEach(el => {
-    el.style.opacity  = '1';
-    el.style.transform = 'translateY(0)';
+// ── HERO ──────────────────────────────────────────────────────
+async function initHero() {
+  const imgs = await getFolderImages('hero');
+  if (imgs.length) {
+    document.getElementById('heroBg').style.backgroundImage = `url('${imgs[0]}')`;
+  }
+}
+
+// ── PORTFOLIO SLIDESHOW ───────────────────────────────────────
+let slideIndex = 0;
+let slideTimer;
+let slideImages = [];
+
+async function initPortfolio() {
+  slideImages = await getFolderImages('portfolio');
+  if (!slideImages.length) return;
+
+  const container = document.getElementById('portfolioSlideshow');
+  const dotsEl    = document.getElementById('slideDots');
+
+  slideImages.forEach((src, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'slide' + (i === 0 ? ' active' : '');
+    slide.style.backgroundImage = `url('${src}')`;
+    slide.innerHTML = '<div class="slide-overlay"></div>';
+    container.insertBefore(slide, container.querySelector('.slideshow-arrows'));
+
+    const dot = document.createElement('button');
+    dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsEl.appendChild(dot);
   });
 
-  if ('IntersectionObserver' in window) {
-    // Reset to hidden so animation can play
-    document.querySelectorAll('.fade-up').forEach(el => {
-      el.style.opacity   = '0';
-      el.style.transform = 'translateY(40px)';
+  startSlideTimer();
+
+  document.getElementById('prevBtn').addEventListener('click', () => { goToSlide((slideIndex - 1 + slideImages.length) % slideImages.length); resetTimer(); });
+  document.getElementById('nextBtn').addEventListener('click', () => { goToSlide((slideIndex + 1) % slideImages.length); resetTimer(); });
+}
+
+function goToSlide(n) {
+  const slides = document.querySelectorAll('.slide');
+  const dots   = document.querySelectorAll('.slide-dot');
+  slides[slideIndex].classList.remove('active');
+  dots[slideIndex].classList.remove('active');
+  slideIndex = n;
+  slides[slideIndex].classList.add('active');
+  dots[slideIndex].classList.add('active');
+}
+
+function startSlideTimer() {
+  slideTimer = setInterval(() => goToSlide((slideIndex + 1) % slideImages.length), 4000);
+}
+
+function resetTimer() {
+  clearInterval(slideTimer);
+  startSlideTimer();
+}
+
+// ── ABOUT PHOTOS ──────────────────────────────────────────────
+async function initAbout() {
+  const imgs = await getFolderImages('about');
+  if (imgs[0]) document.getElementById('aboutMain').src = imgs[0];
+  if (imgs[1]) document.getElementById('aboutSecondary').src = imgs[1];
+  if (imgs[2]) document.getElementById('aboutAccent').src = imgs[2];
+}
+
+// ── SERVICE HOVER PHOTOS ──────────────────────────────────────
+async function initServiceHovers() {
+  const services = [
+    { folder: 'portraits', el: 'hoverPortraits' },
+    { folder: 'events',    el: 'hoverEvents'    },
+    { folder: 'travel',    el: 'hoverTravel'    },
+    { folder: 'brand',     el: 'hoverBrand'     }
+  ];
+
+  for (const svc of services) {
+    const imgs = await getFolderImages(svc.folder);
+    if (!imgs.length) continue;
+
+    const container = document.getElementById(svc.el);
+    // Add overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'service-hover-overlay';
+    container.appendChild(overlay);
+
+    // Add slides (up to 4 photos per service)
+    const subset = imgs.slice(0, 4);
+    subset.forEach((src, i) => {
+      const slide = document.createElement('div');
+      slide.className = 'service-hover-slide' + (i === 0 ? ' active' : '');
+      slide.style.backgroundImage = `url('${src}')`;
+      container.appendChild(slide);
     });
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.style.opacity   = '1';
-          e.target.style.transform = 'translateY(0)';
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08 });
+    // Cycle through photos on hover
+    const card = container.closest('.service-card');
+    let hoverTimer;
+    let hoverIdx = 0;
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    card.addEventListener('mouseenter', () => {
+      hoverIdx = 0;
+      const slides = container.querySelectorAll('.service-hover-slide');
+      slides.forEach((s, i) => s.classList.toggle('active', i === 0));
+      hoverTimer = setInterval(() => {
+        const slides = container.querySelectorAll('.service-hover-slide');
+        slides[hoverIdx].classList.remove('active');
+        hoverIdx = (hoverIdx + 1) % slides.length;
+        slides[hoverIdx].classList.add('active');
+      }, 900);
+    });
+
+    card.addEventListener('mouseleave', () => {
+      clearInterval(hoverTimer);
+      const slides = container.querySelectorAll('.service-hover-slide');
+      slides.forEach((s, i) => s.classList.toggle('active', i === 0));
+    });
   }
+}
+
+// ── CURSOR ────────────────────────────────────────────────────
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0, visible = false;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  if (!visible) { cursor.style.opacity='1'; ring.style.opacity='1'; visible=true; }
+});
+
+(function animateCursor() {
+  cursor.style.left = mx+'px'; cursor.style.top = my+'px';
+  rx += (mx-rx)*0.12; ry += (my-ry)*0.12;
+  ring.style.left = rx+'px'; ring.style.top = ry+'px';
+  requestAnimationFrame(animateCursor);
+})();
+
+document.querySelectorAll('a,button,.service-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.style.transform='translate(-50%,-50%) scale(2.5)'; ring.style.transform='translate(-50%,-50%) scale(1.5)'; ring.style.borderColor='rgba(200,168,130,0.8)'; });
+  el.addEventListener('mouseleave', () => { cursor.style.transform='translate(-50%,-50%) scale(1)'; ring.style.transform='translate(-50%,-50%) scale(1)'; ring.style.borderColor='rgba(200,168,130,0.5)'; });
+});
+
+// ── SCROLL FADE ───────────────────────────────────────────────
+if ('IntersectionObserver' in window) {
+  document.querySelectorAll('.fade-up').forEach(el => { el.style.opacity='0'; el.style.transform='translateY(40px)'; });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+}
+
+// ── INIT ALL ──────────────────────────────────────────────────
+initHero();
+initPortfolio();
+initAbout();
+initServiceHovers();
 </script>
 </body>
 </html>
