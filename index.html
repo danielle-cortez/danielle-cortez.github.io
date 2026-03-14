@@ -42,8 +42,8 @@
   .slide { position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;background-size:cover;background-position:center; }
   .slide.active { opacity:1; }
   .slide-overlay { position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,0.4) 0%,transparent 60%); }
-  .slideshow-controls { position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:10; }
-  .slide-dot { width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.3);border:none;cursor:pointer;transition:all 0.3s;padding:0; }
+  .slideshow-controls { position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10; }
+  .slide-dot { width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.3);border:none;cursor:pointer;transition:all 0.3s;padding:0; }
   .slide-dot.active { background:var(--accent);transform:scale(1.4); }
   .slideshow-arrows { position:absolute;top:50%;transform:translateY(-50%);width:100%;display:flex;justify-content:space-between;padding:0 30px;z-index:10;pointer-events:none; }
   .slide-arrow { width:44px;height:44px;border:1px solid rgba(255,255,255,0.2);background:rgba(10,10,10,0.4);color:var(--off-white);font-size:1.1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;pointer-events:all;transition:all 0.3s; }
@@ -124,7 +124,7 @@
   </ul>
 </nav>
 <section class="hero" id="home">
-  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-bg" style="background-image:url('https://res.cloudinary.com/dbcfaw4kv/image/upload/q_auto,f_auto/_DSC0150_f2p1id')"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Photography &amp; Visual Storytelling</p>
     <h1 class="hero-title">Danielle<br><em>Cortez</em></h1>
@@ -151,9 +151,9 @@
 <section id="about">
   <div class="about-images fade-up">
     <div class="about-photo-stack">
-      <img class="about-photo-main"      src="https://res.cloudinary.com/dbcfaw4kv/image/upload/q_auto,f_auto/about/0D8EFF46-8528-4325-973C-D3ECA73C2784_f0mqjd" alt="Danielle Cortez">
-      <img class="about-photo-secondary" src="https://res.cloudinary.com/dbcfaw4kv/image/upload/q_auto,f_auto/about/CB7B26B1-845C-4E50-9319-55D2CCFDCDFD_iagauu" alt="Danielle Cortez">
-      <img class="about-photo-accent"    src="https://res.cloudinary.com/dbcfaw4kv/image/upload/q_auto,f_auto/about/B8745D25-6EBA-4A61-BD24-0EB4644FEC8D_qxnm9d" alt="Danielle Cortez">
+      <img class="about-photo-main"      src="https://res.cloudinary.com/dbcfaw4kv/image/upload/q_auto,f_auto/0D8EFF46-8528-4325-973C-D3ECA73C2784_f0mqjd" alt="Danielle Cortez">
+      <img class="about-photo-secondary" src="https://res.cloudinary.com/dbcfaw4kv/image/upload/q_auto,f_auto/CB7B26B1-845C-4E50-9319-55D2CCFDCDFD_iagauu" alt="Danielle Cortez">
+      <img class="about-photo-accent"    src="https://res.cloudinary.com/dbcfaw4kv/image/upload/q_auto,f_auto/B8745D25-6EBA-4A61-BD24-0EB4644FEC8D_qxnm9d" alt="Danielle Cortez">
     </div>
   </div>
   <div class="about-text fade-up">
@@ -261,43 +261,53 @@
 <script>
 const C = 'https://res.cloudinary.com/dbcfaw4kv/image/upload/q_auto,f_auto';
 
-// ── ALL PHOTOS HARDCODED — no API needed ──────────────────────
 const PHOTOS = {
   portfolio: [
-    `${C}/portfolio/_DSC0215_qfo1o5`,
-    `${C}/portfolio/0C22B1D3-122F-4F37-AA34-5C2E7CC24EBF_q3zq2b`,
-    `${C}/travel/_DSC0215_qkxhub`,
-    `${C}/travel/4BCD52BF-92A9-42B5-8483-AD8F6EB17E23_1_105_c_pvljvz`,
-    `${C}/portraits/DSCF0226_dhgreu`,
-    `${C}/portraits/FC020B18-9163-4102-8418-FEBD00A37EC3_li4uco`,
-    `${C}/events/_DSC0327_gg1ndb`,
-    `${C}/events/_DSC0313_ps3mvz`,
-    `${C}/brand/_DSC0024_ygdpzp`,
-    `${C}/brand/IMG_0592_vabpwf`,
-    `${C}/about/0D8EFF46-8528-4325-973C-D3ECA73C2784_f0mqjd`,
-    `${C}/about/228E84B1-E0C4-4939-879E-C73BAB86DCEB_slspin`
+    `${C}/_DSC0215_qfo1o5`,`${C}/_DSC0209_rtxqqr`,`${C}/DSCF0226_scdzbu`,
+    `${C}/_DSC0156_uqkijj`,`${C}/IMG_3669_pdr6ps`,`${C}/_DSC0197_a36jk0`,
+    `${C}/_DSC0044_tidukv`,`${C}/EE371906-69DE-48EC-A1C7-E963C4F491F5_qnz55s`,
+    `${C}/DSCF0252_aibhyp`,`${C}/38DB565E-5379-43FB-917C-EF1C3E0C152B_cfmgh8`,
+    `${C}/FC020B18-9163-4102-8418-FEBD00A37EC3_l48kxc`,`${C}/_DSC0273_fvogrm`,
+    `${C}/_DSC0143_v394hc`,`${C}/_DSC0313_hwgr6e`,`${C}/_DSC0129_t09gcy`,
+    `${C}/IMG_3686_w8mcvy`,`${C}/_DSC0121_fjdqto`,`${C}/DSCF0269_fb8elu`,
+    `${C}/0C22B1D3-122F-4F37-AA34-5C2E7CC24EBF_q3zq2b`,`${C}/IMG_2595_cwyet2`,
+    `${C}/08EFA469-4246-49FA-AB95-DFC629568ECA_1_105_c_ns408r`
   ],
   portraits: [
-    `${C}/portraits/DSCF0226_dhgreu`,
-    `${C}/portraits/FC020B18-9163-4102-8418-FEBD00A37EC3_li4uco`
+    `${C}/DSCF0226_dhgreu`,`${C}/_DSC0616_SnapseedCopy_rdgsp6`,
+    `${C}/_DSC0156_xi3qmf`,`${C}/DSCF0252_xas0mx`,`${C}/_DSC0199_dtzusf`,
+    `${C}/_DSC0273_m1kpda`,`${C}/_DSC0129_qnsmr5`,
+    `${C}/FC020B18-9163-4102-8418-FEBD00A37EC3_li4uco`,`${C}/IMG_0307_daaha3`,
+    `${C}/_DSC0121_kchauq`,`${C}/0C22B1D3-122F-4F37-AA34-5C2E7CC24EBF_trsksd`
   ],
   events: [
-    `${C}/events/_DSC0327_gg1ndb`,
-    `${C}/events/_DSC0313_ps3mvz`
+    `${C}/IMG_3668_kq0dth`,`${C}/_DSC0327_gg1ndb`,
+    `${C}/_DSC0313_ps3mvz`,`${C}/727094AB-1CFB-4E43-A715-9A5551CD61BE_1_102_o_kcs9xx`
   ],
   travel: [
-    `${C}/travel/_DSC0215_qkxhub`,
-    `${C}/travel/4BCD52BF-92A9-42B5-8483-AD8F6EB17E23_1_105_c_pvljvz`
+    `${C}/_DSC0215_qkxhub`,`${C}/_DSC0209_zqwyw2`,`${C}/_DSC0190_ekszzw`,
+    `${C}/IMG_3669_acdfns`,`${C}/_DSC0197_uardi6`,`${C}/DSCF0252_tofqn4`,
+    `${C}/_DSC0199_msdbi0`,`${C}/_DSC0179_h9lrm8`,`${C}/IMG_3686_vpwfgl`,
+    `${C}/_DSC0143_ixm8ln`,`${C}/_DSC0185_c93bkq`,`${C}/IMG_0606_lby8ys`,
+    `${C}/DSCF0269_cqsk4i`,`${C}/IMG_2595_ljzwfp`,`${C}/IMG_0592_k2hqfc`,
+    `${C}/FE48D1D1-966C-4A9D-9BB6-1452F38B0B67_1_105_c_tm8vg8`,
+    `${C}/CA7B7575-D868-4525-B19F-34FD67F03CAD_1_102_o_xgt4qe`,
+    `${C}/AE33F173-2FB7-42F5-8D9F-2A3E81156CAB_1_105_c_etmj1i`,
+    `${C}/43BC15BF-CBD1-415C-A8FC-6FD9FE81F665_1_105_c_eizvkk`,
+    `${C}/07D67A2C-711F-4411-96CF-F7C3308F4123_1_105_c_zpawms`,
+    `${C}/5DB4F6AD-91E4-4B12-991F-5FEE5FEF7F03_1_105_c_ctsxhg`,
+    `${C}/5B6B042C-1B0C-46C0-9188-0F0E10C66C88_1_105_c_mat4ha`,
+    `${C}/1D870309-2E9D-41E2-9E18-7502A3B567E2_1_105_c_y48b3z`,
+    `${C}/4BCD52BF-92A9-42B5-8483-AD8F6EB17E23_1_105_c_pvljvz`
   ],
   brand: [
-    `${C}/brand/_DSC0024_ygdpzp`,
-    `${C}/brand/IMG_0592_vabpwf`
+    `${C}/727094AB-1CFB-4E43-A715-9A5551CD61BE_1_102_o_kcs9xx`,
+    `${C}/EE371906-69DE-48EC-A1C7-E963C4F491F5_nhiun1`,`${C}/_DSC0488_vkwybs`,
+    `${C}/38DB565E-5379-43FB-917C-EF1C3E0C152B_anvlpz`,`${C}/_DSC0030_gq4rty`,
+    `${C}/CA7A6858-9247-4DFD-8233-68AE9DC8AC52_lmptjc`,
+    `${C}/IMG_0592_vabpwf`,`${C}/_DSC0024_ygdpzp`
   ]
 };
-
-// ── HERO ──────────────────────────────────────────────────────
-document.getElementById('heroBg').style.backgroundImage =
-  `url('${C}/hero/_DSC0150_f2p1id')`;
 
 // ── PORTFOLIO SLIDESHOW ───────────────────────────────────────
 let slideIndex = 0, slideTimer;
@@ -333,23 +343,23 @@ startTimer();
 
 // ── SERVICE HOVER PHOTOS ──────────────────────────────────────
 function buildHover(containerId, images) {
-  const container = document.getElementById(containerId);
+  const cont = document.getElementById(containerId);
   const overlay = document.createElement('div');
   overlay.className = 'service-hover-overlay';
-  container.appendChild(overlay);
+  cont.appendChild(overlay);
   images.forEach((src, i) => {
     const slide = document.createElement('div');
     slide.className = 'service-hover-slide' + (i === 0 ? ' active' : '');
     slide.style.backgroundImage = `url('${src}')`;
-    container.appendChild(slide);
+    cont.appendChild(slide);
   });
-  const card = container.closest('.service-card');
+  const card = cont.closest('.service-card');
   let hoverTimer, hoverIdx = 0;
   card.addEventListener('mouseenter', () => {
     hoverIdx = 0;
-    container.querySelectorAll('.service-hover-slide').forEach((s,i) => s.classList.toggle('active', i===0));
+    cont.querySelectorAll('.service-hover-slide').forEach((s,i) => s.classList.toggle('active', i===0));
     hoverTimer = setInterval(() => {
-      const slides = container.querySelectorAll('.service-hover-slide');
+      const slides = cont.querySelectorAll('.service-hover-slide');
       slides[hoverIdx].classList.remove('active');
       hoverIdx = (hoverIdx+1) % slides.length;
       slides[hoverIdx].classList.add('active');
@@ -357,7 +367,7 @@ function buildHover(containerId, images) {
   });
   card.addEventListener('mouseleave', () => {
     clearInterval(hoverTimer);
-    container.querySelectorAll('.service-hover-slide').forEach((s,i) => s.classList.toggle('active', i===0));
+    cont.querySelectorAll('.service-hover-slide').forEach((s,i) => s.classList.toggle('active', i===0));
   });
 }
 
