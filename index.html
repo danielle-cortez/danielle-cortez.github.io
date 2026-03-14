@@ -389,12 +389,7 @@ PHOTOS.portfolio.forEach((src, i) => {
 });
 
 function goToSlide(n) {
-  const slides = document.querySelectorAll('.slide');
-  const dots   = document.querySelectorAll('.slide-dot');
-  slides[slideIndex].classList.remove('active');
-  dots[slideIndex].classList.remove('active');
-  slideIndex = n;
-  slides[slideIndex].classList.add('active');
+  const x].classList.add('active');
   dots[slideIndex].classList.add('active');
 }
 function startTimer() { slideTimer = setInterval(() => goToSlide((slideIndex+1) % PHOTOS.portfolio.length), 4000); }
@@ -461,4 +456,10 @@ document.querySelectorAll('a,button,.service-card').forEach(el=>{
 if('IntersectionObserver' in window){
   document.querySelectorAll('.fade-up').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(40px)';});
   const obs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{if(
+    entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';obs.unobserve(e.target);}});
+  },{threshold:0.08});
+  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+}
+</script>
+</body>
+</html>
