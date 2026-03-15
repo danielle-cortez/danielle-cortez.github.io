@@ -13,15 +13,11 @@
   body { background:var(--black);color:var(--off-white);font-family:'Jost',sans-serif;font-weight:200;cursor:none;overflow-x:hidden; }
   .cursor { width:10px;height:10px;background:var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transition:transform 0.15s ease,opacity 0.2s;transform:translate(-50%,-50%);opacity:0; }
   .cursor-ring { width:36px;height:36px;border:1px solid rgba(200,168,130,0.5);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.12s ease;opacity:0; }
-
-  /* NAV */
   nav { position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:28px 60px;background:linear-gradient(to bottom,rgba(10,10,10,0.95),transparent); }
   .nav-logo { font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;letter-spacing:0.1em;color:var(--off-white);text-decoration:none; }
   .nav-links { display:flex;gap:44px;list-style:none; }
   .nav-links a { color:var(--warm-gray);text-decoration:none;font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;transition:color 0.3s; }
   .nav-links a:hover { color:var(--off-white); }
-
-  /* HERO */
   .hero { height:100vh;position:relative;display:flex;align-items:flex-end;padding:0 60px 80px;overflow:hidden; }
   .hero-bg { position:absolute;inset:0;background-size:cover;background-position:center;animation:heroZoom 8s ease-out forwards; }
   .hero-bg::after { content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,0.92) 0%,rgba(10,10,10,0.3) 50%,rgba(10,10,10,0.5) 100%); }
@@ -35,21 +31,16 @@
   .hero-scroll { position:absolute;bottom:80px;right:60px;display:flex;flex-direction:column;align-items:center;gap:10px;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--warm-gray); }
   .hero-scroll::after { content:'';display:block;width:1px;height:60px;background:linear-gradient(to bottom,var(--warm-gray),transparent);animation:scrollLine 2s ease-in-out infinite; }
   @keyframes scrollLine { 0%,100%{opacity:0.4;}50%{opacity:1;} }
-
-  /* SECTIONS */
   section { padding:120px 60px; }
   .section-label { font-size:0.62rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--accent);margin-bottom:14px; }
   .section-title { font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:300;line-height:1.15;margin-bottom:50px; }
   .section-title em { font-style:italic; }
-
-  /* PORTFOLIO — fit portrait photos fully, no cropping */
   #portfolio { padding-top:80px; }
   .gallery-intro { display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:50px; }
   .gallery-intro p { max-width:380px;color:var(--warm-gray);line-height:1.8;font-size:0.9rem; }
   .portfolio-slideshow { position:relative;width:100%;height:92vh;overflow:hidden;background:#0d0d0d; }
   .slide { position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;display:flex;align-items:center;justify-content:center; }
   .slide.active { opacity:1; }
-  /* Background fill for context, actual image sits on top */
   .slide-bg { position:absolute;inset:0;background-size:cover;background-position:center;filter:blur(18px) brightness(0.3);transform:scale(1.1); }
   .slide-img { position:relative;z-index:2;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain; }
   .slideshow-controls { position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10; }
@@ -58,21 +49,16 @@
   .slideshow-arrows { position:absolute;top:50%;transform:translateY(-50%);width:100%;display:flex;justify-content:space-between;padding:0 30px;z-index:10;pointer-events:none; }
   .slide-arrow { width:44px;height:44px;border:1px solid rgba(255,255,255,0.2);background:rgba(10,10,10,0.5);color:var(--off-white);font-size:1.1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;pointer-events:all;transition:all 0.3s; }
   .slide-arrow:hover { background:rgba(200,168,130,0.3);border-color:var(--accent); }
-
-  /* ABOUT — 2x2 grid showing all 4 photos */
   #about { display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center; }
   .about-images { position:relative; }
   .about-images::before { content:'';position:absolute;top:-20px;left:-20px;right:20px;bottom:20px;border:1px solid rgba(200,168,130,0.2);z-index:0; }
   .about-grid { display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6px;position:relative;z-index:1; }
   .about-grid img { width:100%;aspect-ratio:3/4;object-fit:cover;filter:brightness(0.88) contrast(1.05);display:block; }
-  .about-grid img:first-child { aspect-ratio:3/4; }
-  .about-grid img:nth-child(2) { aspect-ratio:3/4;margin-top:30px; }
+  .about-grid img:nth-child(2) { margin-top:30px; }
   .about-text p { color:var(--warm-gray);line-height:1.9;font-size:0.95rem;margin-bottom:22px; }
   .about-stats { display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:50px;padding-top:40px;border-top:1px solid rgba(255,255,255,0.07); }
   .stat-num { font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:var(--accent);line-height:1; }
   .stat-label { font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm-gray);margin-top:6px; }
-
-  /* SERVICES */
   #services { background:var(--dark-card); }
   .services-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:10px; }
   .service-card { padding:50px 40px;background:#111;position:relative;overflow:hidden;transition:background 0.3s; }
@@ -88,16 +74,11 @@
   .service-name { font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;margin-bottom:14px; }
   .service-desc { color:var(--warm-gray);font-size:0.85rem;line-height:1.8;margin-bottom:28px; }
   .service-price { font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent); }
-
-  /* TESTIMONIALS */
   #testimonials { text-align:center; }
   .testimonials-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:30px;margin-top:60px;text-align:left; }
   .testimonial { padding:44px;border:1px solid rgba(255,255,255,0.06);position:relative; }
-  .testimonial::before { content:'"';font-family:'Cormorant Garamond',serif;font-size:6rem;color:var(--accent);opacity:0.25;position:absolute;top:10px;left:34px;line-height:1; }
   .testimonial-text { font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:300;font-style:italic;line-height:1.7;color:var(--off-white);margin-bottom:24px;padding-top:30px; }
   .testimonial-author { font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent); }
-
-  /* CONTACT */
   #contact { display:grid;grid-template-columns:1fr 1fr;gap:100px; }
   .contact-info p { color:var(--warm-gray);line-height:1.9;font-size:0.9rem;margin-bottom:40px; }
   .contact-detail { display:flex;flex-direction:column;gap:16px; }
@@ -112,17 +93,13 @@
   .form-textarea { height:100px; }
   .btn-submit { align-self:flex-start;background:var(--accent);color:var(--black);border:none;padding:16px 44px;font-family:'Jost',sans-serif;font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;transition:background 0.3s,transform 0.2s;margin-top:10px; }
   .btn-submit:hover { background:var(--off-white);transform:translateY(-2px); }
-
-  /* FOOTER */
   footer { padding:50px 60px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center; }
   .footer-logo { font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;letter-spacing:0.1em;color:var(--warm-gray); }
   .footer-copy { font-size:0.65rem;letter-spacing:0.15em;color:rgba(154,143,133,0.5); }
   .footer-social { display:flex;gap:28px;list-style:none; }
   .footer-social a { font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--warm-gray);text-decoration:none;transition:color 0.3s; }
   .footer-social a:hover { color:var(--accent); }
-
   .fade-up { opacity:1;transform:translateY(0);transition:opacity 0.8s ease,transform 0.8s ease; }
-
   @media (max-width:900px) {
     nav{padding:24px 30px;}section{padding:80px 30px;}
     #about,#contact{grid-template-columns:1fr;gap:50px;}
@@ -135,7 +112,6 @@
 <body>
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
-
 <nav>
   <a href="#" class="nav-logo">Danielle Cortez</a>
   <ul class="nav-links">
@@ -145,8 +121,6 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
-
-<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg" style="background-image:url('https://res.cloudinary.com/dbcfaw4kv/image/upload/q_auto,f_auto/_DSC0150_f2p1id')"></div>
   <div class="hero-content">
@@ -156,14 +130,9 @@
   </div>
   <div class="hero-scroll">Scroll</div>
 </section>
-
-<!-- PORTFOLIO -->
 <section id="portfolio">
   <div class="gallery-intro fade-up">
-    <div>
-      <p class="section-label">Selected Work</p>
-      <h2 class="section-title">The <em>Portfolio</em></h2>
-    </div>
+    <div><p class="section-label">Selected Work</p><h2 class="section-title">The <em>Portfolio</em></h2></div>
     <p>A curated selection of portraits, moments, and visual stories — each image a world of its own.</p>
   </div>
   <div class="portfolio-slideshow fade-up" id="portfolioSlideshow">
@@ -174,8 +143,6 @@
     <div class="slideshow-controls" id="slideDots"></div>
   </div>
 </section>
-
-<!-- ABOUT — 2x2 grid -->
 <section id="about">
   <div class="about-images fade-up">
     <div class="about-grid">
@@ -198,72 +165,25 @@
     </div>
   </div>
 </section>
-
-<!-- SERVICES -->
 <section id="services">
   <div class="fade-up" style="text-align:center;margin-bottom:60px;">
     <p class="section-label">What I Offer</p>
     <h2 class="section-title">Services &amp; <em>Pricing</em></h2>
   </div>
   <div class="services-grid fade-up">
-    <div class="service-card">
-      <div class="service-hover-photos" id="hoverPortraits"></div>
-      <div class="service-content">
-        <div class="service-number">01</div>
-        <h3 class="service-name">Portrait Sessions</h3>
-        <p class="service-desc">Individual or small group portraits on location across London or beyond. Relaxed, natural, and directed to bring out something real. Includes a curated gallery of 30+ edited images.</p>
-        <p class="service-price">From £200</p>
-      </div>
-    </div>
-    <div class="service-card">
-      <div class="service-hover-photos" id="hoverEvents"></div>
-      <div class="service-content">
-        <div class="service-number">02</div>
-        <h3 class="service-name">Events &amp; Occasions</h3>
-        <p class="service-desc">Birthdays, graduations, gatherings, and life's bigger moments. Candid, documentary-style coverage — captured as they happen, never staged. Full-day coverage available.</p>
-        <p class="service-price">From £400</p>
-      </div>
-    </div>
-    <div class="service-card">
-      <div class="service-hover-photos" id="hoverTravel"></div>
-      <div class="service-content">
-        <div class="service-number">03</div>
-        <h3 class="service-name">Travel &amp; Editorial</h3>
-        <p class="service-desc">Commission-based travel photography for editorial projects, publications, and personal stories worth telling. Available across Europe and worldwide — let's talk.</p>
-        <p class="service-price">By enquiry</p>
-      </div>
-    </div>
-    <div class="service-card">
-      <div class="service-hover-photos" id="hoverBrand"></div>
-      <div class="service-content">
-        <div class="service-number">04</div>
-        <h3 class="service-name">Brand &amp; Commercial</h3>
-        <p class="service-desc">Atmospheric, story-led imagery for small businesses, creatives, and brands who want photography that feels lived-in rather than produced. Packages tailored to your project.</p>
-        <p class="service-price">From £350</p>
-      </div>
-    </div>
+    <div class="service-card"><div class="service-hover-photos" id="hoverPortraits"></div><div class="service-content"><div class="service-number">01</div><h3 class="service-name">Portrait Sessions</h3><p class="service-desc">Individual or small group portraits on location across London or beyond. Relaxed, natural, and directed to bring out something real. Includes a curated gallery of 30+ edited images.</p><p class="service-price">From £200</p></div></div>
+    <div class="service-card"><div class="service-hover-photos" id="hoverEvents"></div><div class="service-content"><div class="service-number">02</div><h3 class="service-name">Events &amp; Occasions</h3><p class="service-desc">Birthdays, graduations, gatherings, and life's bigger moments. Candid, documentary-style coverage — captured as they happen, never staged. Full-day coverage available.</p><p class="service-price">From £400</p></div></div>
+    <div class="service-card"><div class="service-hover-photos" id="hoverTravel"></div><div class="service-content"><div class="service-number">03</div><h3 class="service-name">Travel &amp; Editorial</h3><p class="service-desc">Commission-based travel photography for editorial projects, publications, and personal stories worth telling. Available across Europe and worldwide — let's talk.</p><p class="service-price">By enquiry</p></div></div>
+    <div class="service-card"><div class="service-hover-photos" id="hoverBrand"></div><div class="service-content"><div class="service-number">04</div><h3 class="service-name">Brand &amp; Commercial</h3><p class="service-desc">Atmospheric, story-led imagery for small businesses, creatives, and brands who want photography that feels lived-in rather than produced. Packages tailored to your project.</p><p class="service-price">From £350</p></div></div>
   </div>
 </section>
-
-<!-- TESTIMONIALS -->
 <section id="testimonials">
-  <div class="fade-up">
-    <p class="section-label">Kind Words</p>
-    <h2 class="section-title">What Clients <em>Say</em></h2>
-  </div>
+  <div class="fade-up"><p class="section-label">Kind Words</p><h2 class="section-title">What Clients <em>Say</em></h2></div>
   <div class="testimonials-grid fade-up">
-    <div class="testimonial">
-      <p class="testimonial-text">Danielle has such an incredible eye. She made us feel completely at ease and the photos turned out beyond what we imagined. We'll cherish them forever.</p>
-      <p class="testimonial-author">— Sarah M., Family Portrait Client</p>
-    </div>
-    <div class="testimonial">
-      <p class="testimonial-text">The brand photos she created for my boutique completely transformed how I show up online. Enquiries doubled in the first month. Worth every penny.</p>
-      <p class="testimonial-author">— Keisha T., Small Business Owner</p>
-    </div>
+    <div class="testimonial"><p class="testimonial-text">Danielle has such an incredible eye. She made us feel completely at ease and the photos turned out beyond what we imagined. We'll cherish them forever.</p><p class="testimonial-author">— Sarah M., Family Portrait Client</p></div>
+    <div class="testimonial"><p class="testimonial-text">The brand photos she created for my boutique completely transformed how I show up online. Enquiries doubled in the first month. Worth every penny.</p><p class="testimonial-author">— Keisha T., Small Business Owner</p></div>
   </div>
 </section>
-
-<!-- CONTACT -->
 <section id="contact">
   <div class="contact-info fade-up">
     <p class="section-label">Get In Touch</p>
@@ -278,14 +198,13 @@
     </div>
   </div>
   <form class="contact-form fade-up" onsubmit="return false;">
-    <div class="form-group"><label class="form-label">Your Name</label><input class="form-input" type="text" placeholder="First & Last Name"></div>
+    <div class="form-group"><label class="form-label">Your Name</label><input class="form-input" type="text" placeholder="First and Last Name"></div>
     <div class="form-group"><label class="form-label">Email Address</label><input class="form-input" type="email" placeholder="you@email.com"></div>
     <div class="form-group"><label class="form-label">Project Type</label><input class="form-input" type="text" placeholder="Portrait, Event, Travel, Brand..."></div>
     <div class="form-group"><label class="form-label">Tell Me More</label><textarea class="form-textarea" placeholder="Share details about your vision, date, location..."></textarea></div>
     <button class="btn-submit" type="submit">Send Enquiry</button>
   </form>
 </section>
-
 <footer>
   <div class="footer-logo">Danielle Cortez Photography</div>
   <p class="footer-copy">© 2026 Danielle Cortez. All rights reserved.</p>
@@ -294,171 +213,95 @@
     <li><a href="https://instagram.com/londonfieldsSessions" target="_blank">Instagram</a></li>
   </ul>
 </footer>
-
 <script>
-const C = 'https://res.cloudinary.com/dbcfaw4kv/image/upload/q_auto,f_auto';
-
-const PHOTOS = {
-  portfolio: [
-    `${C}/IMG_3669_pdr6ps`,
-    `${C}/_DSC0209_rtxqqr`,
-    `${C}/DSCF0226_scdzbu`,
-    `${C}/_DSC0197_a36jk0`,
-    `${C}/_DSC0121_fjdqto`,
-    `${C}/_DSC0143_v394hc`,
-    `${C}/_DSC0313_hwgr6e`,
-    `${C}/_DSC0044_tidukv`,
-    `${C}/DSCF0269_fb8elu`,
-    `${C}/EE371906-69DE-48EC-A1C7-E963C4F491F5_qnz55s`,
-    `${C}/IMG_3686_w8mcvy`,
-    `${C}/_DSC0156_uqkijj`,
-    `${C}/DSCF0252_aibhyp`,
-    `${C}/38DB565E-5379-43FB-917C-EF1C3E0C152B_cfmgh8`,
-    `${C}/FC020B18-9163-4102-8418-FEBD00A37EC3_l48kxc`,
-    `${C}/_DSC0273_fvogrm`,
-    `${C}/_DSC0129_t09gcy`,
-    `${C}/0C22B1D3-122F-4F37-AA34-5C2E7CC24EBF_q3zq2b`,
-    `${C}/_DSC0215_qfo1o5`,
-    `${C}/IMG_2595_cwyet2`,
-    `${C}/08EFA469-4246-49FA-AB95-DFC629568ECA_1_105_c_ns408r`
-  ],
-  // Service hovers — no overlap with portfolio
-  portraits: [
-    `${C}/DSCF0226_dhgreu`,`${C}/_DSC0616_SnapseedCopy_rdgsp6`,`${C}/_DSC0156_xi3qmf`,
-    `${C}/DSCF0252_xas0mx`,`${C}/_DSC0199_dtzusf`,`${C}/_DSC0273_m1kpda`,
-    `${C}/_DSC0129_qnsmr5`,`${C}/FC020B18-9163-4102-8418-FEBD00A37EC3_li4uco`,
-    `${C}/IMG_0307_daaha3`,`${C}/_DSC0121_kchauq`,`${C}/0C22B1D3-122F-4F37-AA34-5C2E7CC24EBF_trsksd`
-  ],
-  events: [
-    `${C}/IMG_3668_kq0dth`,`${C}/_DSC0327_gg1ndb`,
-    `${C}/_DSC0313_ps3mvz`,`${C}/727094AB-1CFB-4E43-A715-9A5551CD61BE_1_102_o_kcs9xx`
-  ],
-  travel: [
-    `${C}/_DSC0215_qkxhub`,`${C}/_DSC0209_zqwyw2`,`${C}/_DSC0190_ekszzw`,
-    `${C}/IMG_3669_acdfns`,`${C}/_DSC0197_uardi6`,`${C}/DSCF0252_tofqn4`,
-    `${C}/_DSC0199_msdbi0`,`${C}/_DSC0179_h9lrm8`,`${C}/IMG_3686_vpwfgl`,
-    `${C}/_DSC0143_ixm8ln`,`${C}/_DSC0185_c93bkq`,`${C}/IMG_0606_lby8ys`,
-    `${C}/DSCF0269_cqsk4i`,`${C}/IMG_2595_ljzwfp`,`${C}/IMG_0592_k2hqfc`,
-    `${C}/FE48D1D1-966C-4A9D-9BB6-1452F38B0B67_1_105_c_tm8vg8`,
-    `${C}/CA7B7575-D868-4525-B19F-34FD67F03CAD_1_102_o_xgt4qe`,
-    `${C}/AE33F173-2FB7-42F5-8D9F-2A3E81156CAB_1_105_c_etmj1i`,
-    `${C}/43BC15BF-CBD1-415C-A8FC-6FD9FE81F665_1_105_c_eizvkk`,
-    `${C}/07D67A2C-711F-4411-96CF-F7C3308F4123_1_105_c_zpawms`,
-    `${C}/5DB4F6AD-91E4-4B12-991F-5FEE5FEF7F03_1_105_c_ctsxhg`,
-    `${C}/5B6B042C-1B0C-46C0-9188-0F0E10C66C88_1_105_c_mat4ha`,
-    `${C}/1D870309-2E9D-41E2-9E18-7502A3B567E2_1_105_c_y48b3z`,
-    `${C}/4BCD52BF-92A9-42B5-8483-AD8F6EB17E23_1_105_c_pvljvz`
-  ],
-  brand: [
-    `${C}/727094AB-1CFB-4E43-A715-9A5551CD61BE_1_102_o_kcs9xx`,
-    `${C}/EE371906-69DE-48EC-A1C7-E963C4F491F5_nhiun1`,`${C}/_DSC0488_vkwybs`,
-    `${C}/38DB565E-5379-43FB-917C-EF1C3E0C152B_anvlpz`,`${C}/_DSC0030_gq4rty`,
-    `${C}/CA7A6858-9247-4DFD-8233-68AE9DC8AC52_lmptjc`,
-    `${C}/IMG_0592_vabpwf`,`${C}/_DSC0024_ygdpzp`
-  ]
+var C='https://res.cloudinary.com/dbcfaw4kv/image/upload/q_auto,f_auto';
+var PHOTOS={
+  portfolio:[C+'/IMG_3669_pdr6ps',C+'/_DSC0209_rtxqqr',C+'/DSCF0226_scdzbu',C+'/_DSC0197_a36jk0',C+'/_DSC0121_fjdqto',C+'/_DSC0143_v394hc',C+'/_DSC0313_hwgr6e',C+'/_DSC0044_tidukv',C+'/DSCF0269_fb8elu',C+'/EE371906-69DE-48EC-A1C7-E963C4F491F5_qnz55s',C+'/IMG_3686_w8mcvy',C+'/_DSC0156_uqkijj',C+'/DSCF0252_aibhyp',C+'/38DB565E-5379-43FB-917C-EF1C3E0C152B_cfmgh8',C+'/FC020B18-9163-4102-8418-FEBD00A37EC3_l48kxc',C+'/_DSC0273_fvogrm',C+'/_DSC0129_t09gcy',C+'/0C22B1D3-122F-4F37-AA34-5C2E7CC24EBF_q3zq2b',C+'/_DSC0215_qfo1o5',C+'/IMG_2595_cwyet2',C+'/08EFA469-4246-49FA-AB95-DFC629568ECA_1_105_c_ns408r'],
+  portraits:[C+'/DSCF0226_dhgreu',C+'/_DSC0616_SnapseedCopy_rdgsp6',C+'/_DSC0156_xi3qmf',C+'/DSCF0252_xas0mx',C+'/_DSC0199_dtzusf',C+'/_DSC0273_m1kpda',C+'/_DSC0129_qnsmr5',C+'/FC020B18-9163-4102-8418-FEBD00A37EC3_li4uco',C+'/IMG_0307_daaha3',C+'/_DSC0121_kchauq',C+'/0C22B1D3-122F-4F37-AA34-5C2E7CC24EBF_trsksd'],
+  events:[C+'/IMG_3668_kq0dth',C+'/_DSC0327_gg1ndb',C+'/_DSC0313_ps3mvz',C+'/727094AB-1CFB-4E43-A715-9A5551CD61BE_1_102_o_kcs9xx'],
+  travel:[C+'/_DSC0215_qkxhub',C+'/_DSC0209_zqwyw2',C+'/_DSC0190_ekszzw',C+'/IMG_3669_acdfns',C+'/_DSC0197_uardi6',C+'/DSCF0252_tofqn4',C+'/_DSC0199_msdbi0',C+'/_DSC0179_h9lrm8',C+'/IMG_3686_vpwfgl',C+'/_DSC0143_ixm8ln',C+'/_DSC0185_c93bkq',C+'/IMG_0606_lby8ys',C+'/DSCF0269_cqsk4i',C+'/IMG_2595_ljzwfp',C+'/IMG_0592_k2hqfc',C+'/FE48D1D1-966C-4A9D-9BB6-1452F38B0B67_1_105_c_tm8vg8',C+'/CA7B7575-D868-4525-B19F-34FD67F03CAD_1_102_o_xgt4qe',C+'/AE33F173-2FB7-42F5-8D9F-2A3E81156CAB_1_105_c_etmj1i',C+'/43BC15BF-CBD1-415C-A8FC-6FD9FE81F665_1_105_c_eizvkk',C+'/07D67A2C-711F-4411-96CF-F7C3308F4123_1_105_c_zpawms',C+'/5DB4F6AD-91E4-4B12-991F-5FEE5FEF7F03_1_105_c_ctsxhg',C+'/5B6B042C-1B0C-46C0-9188-0F0E10C66C88_1_105_c_mat4ha',C+'/1D870309-2E9D-41E2-9E18-7502A3B567E2_1_105_c_y48b3z',C+'/4BCD52BF-92A9-42B5-8483-AD8F6EB17E23_1_105_c_pvljvz'],
+  brand:[C+'/727094AB-1CFB-4E43-A715-9A5551CD61BE_1_102_o_kcs9xx',C+'/EE371906-69DE-48EC-A1C7-E963C4F491F5_nhiun1',C+'/_DSC0488_vkwybs',C+'/38DB565E-5379-43FB-917C-EF1C3E0C152B_anvlpz',C+'/_DSC0030_gq4rty',C+'/CA7A6858-9247-4DFD-8233-68AE9DC8AC52_lmptjc',C+'/IMG_0592_vabpwf',C+'/_DSC0024_ygdpzp']
 };
-
-// ── PORTFOLIO SLIDESHOW (contain — full photo visible) ────────
-let slideIndex = 0, slideTimer;
-const container = document.getElementById('portfolioSlideshow');
-const dotsEl    = document.getElementById('slideDots');
-
-PHOTOS.portfolio.forEach((src, i) => {
-  const slide = document.createElement('div');
-  slide.className = 'slide' + (i === 0 ? ' active' : '');
-
-  // Blurred background fill for letterbox areas
-  const bg = document.createElement('div');
-  bg.className = 'slide-bg';
-  bg.style.backgroundImage = `url('${src}')`;
+var slideIndex=0,slideTimer;
+var container=document.getElementById('portfolioSlideshow');
+var dotsEl=document.getElementById('slideDots');
+PHOTOS.portfolio.forEach(function(src,i){
+  var slide=document.createElement('div');
+  slide.className='slide'+(i===0?' active':'');
+  var bg=document.createElement('div');
+  bg.className='slide-bg';
+  bg.style.backgroundImage="url('"+src+"')";
   slide.appendChild(bg);
-
-  // Actual image — contains fully, no crop
-  const img = document.createElement('img');
-  img.className = 'slide-img';
-  img.src = src;
-  img.alt = 'Danielle Cortez Photography';
+  var img=document.createElement('img');
+  img.className='slide-img';
+  img.src=src;
+  img.alt='Danielle Cortez Photography';
   slide.appendChild(img);
-
-  container.insertBefore(slide, container.querySelector('.slideshow-arrows'));
-
-  const dot = document.createElement('button');
-  dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
-  dot.addEventListener('click', () => { goToSlide(i); resetTimer(); });
+  container.insertBefore(slide,container.querySelector('.slideshow-arrows'));
+  var dot=document.createElement('button');
+  dot.className='slide-dot'+(i===0?' active':'');
+  dot.addEventListener('click',(function(idx){return function(){goToSlide(idx);resetTimer();};})(i));
   dotsEl.appendChild(dot);
 });
-
-function goToSlide(n) {
-  const x].classList.add('active');
+function goToSlide(n){
+  var slides=document.querySelectorAll('.slide');
+  var dots=document.querySelectorAll('.slide-dot');
+  slides[slideIndex].classList.remove('active');
+  dots[slideIndex].classList.remove('active');
+  slideIndex=n;
+  slides[slideIndex].classList.add('active');
   dots[slideIndex].classList.add('active');
 }
-function startTimer() { slideTimer = setInterval(() => goToSlide((slideIndex+1) % PHOTOS.portfolio.length), 4000); }
-function resetTimer()  { clearInterval(slideTimer); startTimer(); }
-document.getElementById('prevBtn').addEventListener('click', () => { goToSlide((slideIndex-1+PHOTOS.portfolio.length)%PHOTOS.portfolio.length); resetTimer(); });
-document.getElementById('nextBtn').addEventListener('click', () => { goToSlide((slideIndex+1)%PHOTOS.portfolio.length); resetTimer(); });
+function startTimer(){slideTimer=setInterval(function(){goToSlide((slideIndex+1)%PHOTOS.portfolio.length);},4000);}
+function resetTimer(){clearInterval(slideTimer);startTimer();}
+document.getElementById('prevBtn').addEventListener('click',function(){goToSlide((slideIndex-1+PHOTOS.portfolio.length)%PHOTOS.portfolio.length);resetTimer();});
+document.getElementById('nextBtn').addEventListener('click',function(){goToSlide((slideIndex+1)%PHOTOS.portfolio.length);resetTimer();});
 startTimer();
-
-// ── SERVICE HOVER PHOTOS ──────────────────────────────────────
-function buildHover(containerId, images) {
-  const cont = document.getElementById(containerId);
-  const overlay = document.createElement('div');
-  overlay.className = 'service-hover-overlay';
-  cont.appendChild(overlay);
-  images.forEach((src, i) => {
-    const slide = document.createElement('div');
-    slide.className = 'service-hover-slide' + (i === 0 ? ' active' : '');
-    slide.style.backgroundImage = `url('${src}')`;
-    cont.appendChild(slide);
+function buildHover(id,images){
+  var cont=document.getElementById(id);
+  var ov=document.createElement('div');
+  ov.className='service-hover-overlay';
+  cont.appendChild(ov);
+  images.forEach(function(src,i){
+    var s=document.createElement('div');
+    s.className='service-hover-slide'+(i===0?' active':'');
+    s.style.backgroundImage="url('"+src+"')";
+    cont.appendChild(s);
   });
-  const card = cont.closest('.service-card');
-  let hoverTimer, hoverIdx = 0;
-  card.addEventListener('mouseenter', () => {
-    hoverIdx = 0;
-    cont.querySelectorAll('.service-hover-slide').forEach((s,i) => s.classList.toggle('active', i===0));
-    hoverTimer = setInterval(() => {
-      const slides = cont.querySelectorAll('.service-hover-slide');
-      slides[hoverIdx].classList.remove('active');
-      hoverIdx = (hoverIdx+1) % slides.length;
-      slides[hoverIdx].classList.add('active');
-    }, 900);
+  var card=cont.closest('.service-card');
+  var ht,hi=0;
+  card.addEventListener('mouseenter',function(){
+    hi=0;
+    cont.querySelectorAll('.service-hover-slide').forEach(function(s,i){s.classList.toggle('active',i===0);});
+    ht=setInterval(function(){
+      var sl=cont.querySelectorAll('.service-hover-slide');
+      sl[hi].classList.remove('active');
+      hi=(hi+1)%sl.length;
+      sl[hi].classList.add('active');
+    },900);
   });
-  card.addEventListener('mouseleave', () => {
-    clearInterval(hoverTimer);
-    cont.querySelectorAll('.service-hover-slide').forEach((s,i) => s.classList.toggle('active', i===0));
+  card.addEventListener('mouseleave',function(){
+    clearInterval(ht);
+    cont.querySelectorAll('.service-hover-slide').forEach(function(s,i){s.classList.toggle('active',i===0);});
   });
 }
-
-buildHover('hoverPortraits', PHOTOS.portraits);
-buildHover('hoverEvents',    PHOTOS.events);
-buildHover('hoverTravel',    PHOTOS.travel);
-buildHover('hoverBrand',     PHOTOS.brand);
-
-// ── CURSOR ────────────────────────────────────────────────────
-const cursor = document.getElementById('cursor');
-const ring   = document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0,visible=false;
-document.addEventListener('mousemove', e => {
-  mx=e.clientX; my=e.clientY;
-  if(!visible){cursor.style.opacity='1';ring.style.opacity='1';visible=true;}
+buildHover('hoverPortraits',PHOTOS.portraits);
+buildHover('hoverEvents',PHOTOS.events);
+buildHover('hoverTravel',PHOTOS.travel);
+buildHover('hoverBrand',PHOTOS.brand);
+var cursor=document.getElementById('cursor');
+var ring=document.getElementById('cursorRing');
+var mx=0,my=0,rx=0,ry=0,vis=false;
+document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;if(!vis){cursor.style.opacity='1';ring.style.opacity='1';vis=true;}});
+(function tick(){cursor.style.left=mx+'px';cursor.style.top=my+'px';rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick);})();
+document.querySelectorAll('a,button,.service-card').forEach(function(el){
+  el.addEventListener('mouseenter',function(){cursor.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.transform='translate(-50%,-50%) scale(1.5)';ring.style.borderColor='rgba(200,168,130,0.8)';});
+  el.addEventListener('mouseleave',function(){cursor.style.transform='translate(-50%,-50%) scale(1)';ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(200,168,130,0.5)';});
 });
-(function tick(){
-  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
-  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
-  ring.style.left=rx+'px'; ring.style.top=ry+'px';
-  requestAnimationFrame(tick);
-})();
-document.querySelectorAll('a,button,.service-card').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cursor.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.transform='translate(-50%,-50%) scale(1.5)';ring.style.borderColor='rgba(200,168,130,0.8)';});
-  el.addEventListener('mouseleave',()=>{cursor.style.transform='translate(-50%,-50%) scale(1)';ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(200,168,130,0.5)';});
-});
-
-// ── SCROLL FADE ───────────────────────────────────────────────
 if('IntersectionObserver' in window){
-  document.querySelectorAll('.fade-up').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(40px)';});
-  const obs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';obs.unobserve(e.target);}});
-  },{threshold:0.08});
-  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+  document.querySelectorAll('.fade-up').forEach(function(el){el.style.opacity='0';el.style.transform='translateY(40px)';});
+  var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';obs.unobserve(e.target);}});},{threshold:0.08});
+  document.querySelectorAll('.fade-up').forEach(function(el){obs.observe(el);});
 }
 </script>
 </body>
