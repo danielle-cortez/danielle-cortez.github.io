@@ -256,7 +256,16 @@ function startTimer(){slideTimer=setInterval(function(){goToSlide((slideIndex+1)
 function resetTimer(){clearInterval(slideTimer);startTimer();}
 document.getElementById('prevBtn').addEventListener('click',function(){goToSlide((slideIndex-1+PHOTOS.portfolio.length)%PHOTOS.portfolio.length);resetTimer();});
 document.getElementById('nextBtn').addEventListener('click',function(){goToSlide((slideIndex+1)%PHOTOS.portfolio.length);resetTimer();});
-startTimer();
+var slideshowStarted = false;
+var slideshowObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting && !slideshowStarted) {
+      slideshowStarted = true;
+      startTimer();
+    }
+  });
+}, { threshold: 0.8 });
+slideshowObserver.observe(document.getElementById('portfolioSlideshow'));
 function buildHover(id,images){
   var cont=document.getElementById(id);
   var ov=document.createElement('div');
